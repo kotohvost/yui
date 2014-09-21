@@ -1,0 +1,189 @@
+.\" Copyright (c) 2007  Rashid N. "Citycat" Achilov 	All rights reserved.
+.\"
+.\" All or some portions of this file are derived from material licensed
+.\" to the Rashid N. Achilov and are reproduced herein with the permission of
+.\" Rashid N. Achilov
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of the author nor the names of any co-contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY RASHID N. ACHILOV AND THEIR CONTRIBUTORS ``AS IS''
+.\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: y.1,v 3.2.2.1 2007/07/24 09:58:07 shelton Exp $
+.\"
+.Dd Jan 18, 2007
+.Dt Y 1 URM
+.Os
+.Sh NAME
+.Nm y
+.Nd multi-windowed, multi-purposed text editor with man, info and gdb interfaces
+.Sh SYNOPSIS
+.Nm y
+.Bq options
+.Bq filename1
+.Bq ...filenameN
+.Pp
+.Qo options Qc are:
+.Bl -hang -width 3
+.It Fl r
+.Fl
+.Qo read only Qc mode
+.It Fl b
+.Fl
+.Qo binary Qc mode
+.It Fl M
+.Fl
+file is
+.Qq formatted manual page
+.It Fl m
+.Fl
+call man
+.It Fl w
+.Fl
+argument is URL
+.El
+.Sh DESCRIPTION
+.Nm y
+is a multi-windowed console text editor, primarly intended for programmers and
+system administrators.
+.Pp
+.Nm
+main features is:
+.Bl -dash -offset indent -compact
+.It
+multi-windows interface with up and down menu lines
+.It
+Operable window list
+.It
+Copy/paste between windows
+.It
+Inter-windows search and replace
+.It
+Help window with ablility to browse manual pages and info files
+.It
+Internal terminal window
+.It
+Internal GDB interface with ability to set up breakpoints inside text window
+.It
+Status saving - you can load 20 files from your program project by one click
+.It
+C-style Syntax highlight
+.El
+.Sh ENVIRONMENT
+.Bl -hang -width "YUI_PATH"
+.It Ev YUI_PATH
+Specifies place, where supplementary files for
+.Nm
+can be found
+.Po for file list see
+.Sx FILES Ns Pc
+.El
+.Sh FILES
+Default supplementary files location is
+.Pa /usr/local/lib/yui .
+These files contains global options and settings. When you setup it manually
+.Po y has internal setup screen Pc , these settings will kept into a
+.Pa $HOME/.yui
+directory and will override global options and settings.
+.Pp
+These files are:
+.Bl -hang -width "highlight_html"
+.It Sy yhelp.html
+Help contents for
+.Nm Po HTML syntax Pc
+.It Sy options
+Global
+.Po personal Pc options
+.It Sy keymap
+Global
+.Po personal Pc hotkeys mapping
+.It Sy colormap
+Global
+.Po personal Pc colors mapping
+.It Sy highlight
+Global
+.Po personal Pc syntax highlight rules
+.It Sy highlight_html
+Global
+.Po personal Pc HTML syntax hightlight rules, also as some information about
+HTML tags
+.El
+.Sh EXAMPLES
+Valid start line for
+.Nm
+can looks like:
+.Bl -item
+.It
+y main.c ../prog/list.h
+.It
+y
+.Fl r
+prog/list.h
+.Fl M
+termcap.0
+.Fl b
+/bin/ls
+.It
+y
+.Fl w
+ftp://ftp.itk.ru
+.It
+y
+.Fl w
+http://www.itk.ru
+.Fl w
+telnet://last.itk.ru
+.It
+y
+.Fl w
+man:termcap
+.Fl w
+info:
+.It
+y
+.Fl w
+file:
+.It
+y
+.Fl m
+termcap
+.It
+y
+.Fl m Qo termcap Ns Po 5 Pc Qc
+.El
+.Sh HISTORY
+.Nm
+is a very ancient software, originally developed by
+.Sy Paul Lazarev
+and
+.Sy Sergey Rosenfeld
+at Engineering-Technical Company (ITK, http://www.itk.ru). Startly, this software
+was under free, but closed-source license. Since year 2000 it was abandoned, dropped
+down with sources at
+.Pa ftp://ftp.itk.ru/pub/yui/yui-3.1.15.tgz
+and released under GPL license. This version was heavily adapted for
+.Sy FreeBSD
+and many useless files were throw out. I constanlty work on them, because it still
+and forever is my favorite editor.
+.Sh AUTHORS
+This manual page was written by
+.An Rashid N. Achilov Aq citycat4@ngs.ru .

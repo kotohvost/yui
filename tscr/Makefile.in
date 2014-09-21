@@ -1,0 +1,131 @@
+#
+# Yui next generation - yn. Based on yui version 3.1.15 by Sergey Rozenfeld
+# Distirbuted under BSD lisense.
+#
+# $Id: Makefile.in,v 3.1.2.1 2007/07/24 11:46:48 shelton Exp $
+#
+
+SRCS    = program.cc window.cc dialog.cc getobj.cc visual.cc modal.cc\
+	winlist.cc dir.cc filebox.cc listbox.cc menu.cc keymap.cc yterm.cc\
+	i_lines.cc date.c filepath.c tbrow.cc tag.cc
+
+OBJS    = program.o window.o dialog.o getobj.o visual.o modal.o\
+	winlist.o dir.o filebox.o listbox.o menu.o keymap.o yterm.o\
+	i_lines.o date.o filepath.o tbrow.o tag.o
+
+BOBJS	= tcolumn.o tbrowse.o
+
+LIBS	= ../task/libscrn.a ../task/libtask.a ../term/libtcaps.a
+LIB	= libappl.a
+
+#DMALLOC = -DDMALLOC
+#LDMALLOC = -ldmalloc -ldmalloc++
+
+SYSTEM	= -D@SYSTEM@
+
+# Compiler
+CPP=	@CXX@
+
+# Tools
+RM=	@RM@
+AR=	@AR@
+RANLIB=	@RANLIB@
+SORT=	@SORT@
+CP=	@CP@
+
+CFLAGS = $(SYSTEM) -I../task $(DMALLOC) @CFLAGS@
+
+.SUFFIXES: .o .cc
+
+.cc.o:
+	$(CPP) $(CFLAGS) -c $<
+
+.c.o:
+	$(CC) $(CFLAGS) -c $<
+
+tscr:  $(LIB) $(LIBS) tscr.o
+	$(CPP) $(CFLAGS) -o tscr tscr.o $(LIB) $(LIBS) -lm $(LDMALLOC)
+
+$(LIB): $(OBJS)
+	-$(RM) $@
+	$(AR) rv $@ $(OBJS)
+	$(RANLIB) $@
+
+clean:
+	-$(RM) -f *.o *.a tscr *core core* _hashcode.h
+
+distclean: clean
+	-$(RM) -f Makefile
+
+hash: ../task/hashextract $(SRCS) tscr.cc
+	../task/hashextract $(SRCS) tscr.cc | $(SORT) -u > _hashcode.h
+	$(CMP) _hashcode.h hashcode.h || $(CP) _hashcode.h hashcode.h
+
+browse: $(BOBJS)
+
+# DO NOT DELETE
+
+program.o: ../task/term.h program.h ../task/task.h ../task/list.h
+program.o: ../task/message.h hashcode.h ../task/collect.h ../task/keytask.h
+program.o: ../task/keycodes.h ../task/point.h keymap.h ../task/langs.h menu.h
+program.o: listbox.h ../task/array.h window.h getobj.h ../task/screen.h
+program.o: status.h winlist.h i_lines.h modal.h dialog.h visual.h keybox.h
+window.o: program.h ../task/task.h ../task/list.h ../task/message.h
+window.o: hashcode.h ../task/collect.h ../task/keytask.h ../task/keycodes.h
+window.o: ../task/point.h keymap.h ../task/langs.h modal.h dialog.h window.h
+window.o: getobj.h ../task/screen.h visual.h menu.h listbox.h ../task/array.h
+window.o: status.h
+dialog.o: ../task/reg_expr.h status.h window.h getobj.h ../task/collect.h
+dialog.o: ../task/keycodes.h ../task/screen.h ../task/point.h ../task/langs.h
+dialog.o: keymap.h hashcode.h dialog.h visual.h i_lines.h listbox.h
+dialog.o: ../task/array.h program.h ../task/task.h ../task/list.h
+dialog.o: ../task/message.h ../task/keytask.h menu.h
+getobj.o: dialog.h window.h getobj.h ../task/collect.h ../task/keycodes.h
+getobj.o: ../task/screen.h ../task/point.h ../task/langs.h keymap.h visual.h
+getobj.o: hashcode.h
+visual.o: visual.h ../task/collect.h ../task/point.h
+modal.o: hashcode.h modal.h dialog.h window.h getobj.h ../task/collect.h
+modal.o: ../task/keycodes.h ../task/screen.h ../task/point.h ../task/langs.h
+modal.o: keymap.h visual.h
+winlist.o: winlist.h listbox.h ../task/array.h window.h getobj.h
+winlist.o: ../task/collect.h ../task/keycodes.h ../task/screen.h
+winlist.o: ../task/point.h ../task/langs.h keymap.h hashcode.h program.h
+winlist.o: ../task/task.h ../task/list.h ../task/message.h ../task/keytask.h
+dir.o: ../task/reg_expr.h dir.h filepath.h ../task/collect.h
+filebox.o: hashcode.h filebox.h modal.h dialog.h window.h getobj.h
+filebox.o: ../task/collect.h ../task/keycodes.h ../task/screen.h
+filebox.o: ../task/point.h ../task/langs.h keymap.h visual.h listbox.h
+filebox.o: ../task/array.h dir.h filepath.h
+listbox.o: ../task/reg_expr.h listbox.h ../task/array.h window.h getobj.h
+listbox.o: ../task/collect.h ../task/keycodes.h ../task/screen.h
+listbox.o: ../task/point.h ../task/langs.h keymap.h dialog.h visual.h
+listbox.o: hashcode.h
+menu.o: menu.h hashcode.h listbox.h ../task/array.h window.h getobj.h
+menu.o: ../task/collect.h ../task/keycodes.h ../task/screen.h ../task/point.h
+menu.o: ../task/langs.h keymap.h status.h program.h ../task/task.h
+menu.o: ../task/list.h ../task/message.h ../task/keytask.h
+keymap.o: listbox.h ../task/array.h window.h getobj.h ../task/collect.h
+keymap.o: ../task/keycodes.h ../task/screen.h ../task/point.h ../task/langs.h
+keymap.o: keymap.h keybox.h dialog.h visual.h program.h ../task/task.h
+keymap.o: ../task/list.h ../task/message.h hashcode.h ../task/keytask.h
+keymap.o: menu.h
+yterm.o: ../task/term.h yterm.h window.h getobj.h ../task/collect.h
+yterm.o: ../task/keycodes.h ../task/screen.h ../task/point.h ../task/langs.h
+yterm.o: keymap.h menu.h hashcode.h listbox.h ../task/array.h ../task/task.h
+yterm.o: ../task/list.h ../task/message.h ../task/iobuf.h ../task/regexpr.h
+yterm.o: program.h ../task/keytask.h modal.h dialog.h visual.h
+i_lines.o: i_lines.h listbox.h ../task/array.h window.h getobj.h
+i_lines.o: ../task/collect.h ../task/keycodes.h ../task/screen.h
+i_lines.o: ../task/point.h ../task/langs.h keymap.h
+filepath.o: filepath.h
+tbrow.o: program.h ../task/task.h ../task/list.h ../task/message.h hashcode.h
+tbrow.o: ../task/collect.h ../task/keytask.h ../task/keycodes.h
+tbrow.o: ../task/point.h keymap.h ../task/langs.h tbrow.h window.h getobj.h
+tbrow.o: ../task/screen.h dialog.h visual.h listbox.h ../task/array.h
+tag.o: tag.h
+tscr.o: ../task/term.h program.h ../task/task.h ../task/list.h
+tscr.o: ../task/message.h hashcode.h ../task/collect.h ../task/keytask.h
+tscr.o: ../task/keycodes.h ../task/point.h keymap.h ../task/langs.h dialog.h
+tscr.o: window.h getobj.h ../task/screen.h visual.h menu.h listbox.h
+tscr.o: ../task/array.h status.h filebox.h modal.h dir.h filepath.h i_lines.h
+tscr.o: tbrow.h tag.h yterm.h

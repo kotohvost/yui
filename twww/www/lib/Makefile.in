@@ -1,0 +1,29 @@
+#	BSDI	Makefile,v 1.1.1.1 1995/01/06 00:49:44 polk Exp
+
+RM=	@RM@
+
+MKLINT=no
+MKPIC=no
+TSORT=cat
+LORDER=ls
+LIB=	WWW
+SRCS=	HTAABrow.c HTAAUtil.c HTAccess.c HTAlert.c HTAnchor.c \
+	HTAssoc.c HTAtom.c HTBTree.c HTChunk.c HTDescript.c \
+	HTDirBrw.c HTError.c HTErrorMsg.c HTFTP.c HTFWriter.c HTFile.c \
+	HTFormat.c HTGopher.c HTGuess.c HTHistory.c HTIcons.c \
+	HTInit.c HTList.c HTMIME.c HTML.c HTMLGen.c HTMLPDTD.c \
+	HTMulti.c HTNews.c HTParse.c HTPlain.c HTRules.c HTString.c \
+	HTStyle.c HTTCP.c HTTP.c HTTeXGen.c HTTee.c HTTelnet.c \
+	HTUU.c HTWSRC.c HTWriter.c SGML.c
+XXX=	HTWAIS.c
+
+NOPROFILE=noprofile
+
+CFLAGS+= @CFLAGS@
+
+install:
+
+distclean:
+	-$(RM) -f Makefile
+
+.include <bsd.lib.mk>

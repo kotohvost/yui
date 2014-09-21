@@ -1,0 +1,151 @@
+# This file contained color settings for editor. Personal file can placed
+# at $HOME/.yui directory, common file - at @LIBPATH@/yui directory or
+# at path, specified in YUI_PATH environment variable.
+# Color description line consists from three chunks:
+#  - keyword, symbol color, background color
+# Available background colors is 8 based colors
+#
+# black
+# red
+# green
+# yellow
+# blue
+# magenta
+# cyan
+# white
+#
+# Available symbol colors is 16-based colors (8 background + h_black, h_red, etc...)
+#
+
+# ******************
+# common background
+# ******************
+e_background	h_white		blue	# background without any opened windows
+
+# ***************
+# menu
+# ***************
+m_active	black  		green	# current element
+m_item		black  		white	# element
+m_hot_active	red    		green	# "hotkey", selected element
+m_hot_normal	red    		white	# "hotkey", ordinary element
+
+# ***************
+# status line
+# ***************
+s_text		black		white	# ordinary text
+s_light		red		white	# selected text
+
+# ***************
+# editor window
+# ***************
+e_frame_active	h_yellow	blue	# border, active window
+e_frame_normal	h_cyan		blue	# border, inactive window
+e_text		h_cyan		blue	# text
+e_block		black		cyan	# block (stream or columnar)
+e_find		black		white	# found with search
+e_end_line	black		green	# End-Of-Text marker
+e_code		white		blue	# symbol with code < 32
+e_debug_line	h_white		green	# current line in debugger
+e_breakpoint	h_white		red	# debugger breakpoint
+e_man		h_yellow	blue	# selected at manpage
+e_comment	white		blue	# comment
+e_preproc	h_green		blue	# preprocessor
+e_ht_tag	h_yellow	blue	# html tag
+e_ht_par_name	h_magenta	blue	# html tag parameter name
+e_par_val	h_green		blue	# html tag parameter value
+e_highlight1	h_white		blue	# keywords
+e_highlight2	h_yellow	blue	# brackets
+
+# ***************
+# dialog window
+# ***************
+d_frame_active 		h_white	 white	# border, active dialog
+d_frame_normal 		black	 white	# border, inactive dialog
+d_text			black	 white	# text
+d_block			white	 blue	# block
+d_find			h_white	 cyan	# searched at find
+d_attr1			h_white	 white	# attr1
+d_attr2			h_white	 white	# attr2
+d_attr3			h_white	 white	# attr3
+d_attr4			h_white	 white	# attr4
+d_attr5			h_white	 white	# attr5
+d_attr6			h_white	 white	# attr6
+d_attr7			h_white	 white	# attr7
+d_button_active		h_yellow wblue	# active button
+d_button_normal		h_yellow wcyan	# button
+d_input_active 		h_white	 blue	# active input line
+d_input_normal 		h_white	 cyan	# input line
+d_box_active_item	black	 green	# active item
+d_box_normal_item	black	 cyan	# inactive item
+d_box_active_cur	h_white	 green	# current active item
+d_box_normal_cur	h_white	 cyan	# current inactive item
+
+# ************************
+# list windows (object)
+# ************************
+l_frame_active		h_white	 white	# border, active object
+l_frame_normal		black	 white	# border, inactive object
+l_active_item		black	 cyan	# element, active object
+l_normal_item		black	 cyan	# element, inactive object
+l_active_item_sel	h_yellow cyan	# tagged element, active object
+l_normal_item_sel	h_yellow cyan	# tagged element, inactive object
+l_active_item_cur	black	 green	# current element, active object
+l_normal_item_cur	h_white	 cyan	# current element, inactive object
+l_active_item_sc	h_yellow green	# current tagged element, active object
+l_normal_item_sc	h_yellow cyan	# current tagged element, inactive object
+l_info			h_white	 blue	# info-field of object
+
+# *****************
+# web-browser
+# *****************
+w_frame_active 		h_white	 cyan	# border, window upside
+w_frame_normal 		white	 cyan	# border, window does not upside
+w_text			black	 cyan	# text
+w_block			black	 green	# block
+w_find			black	 white	# searched at find
+w_attr1			h_cyan	 cyan	#
+w_attr2			h_white	 cyan	#
+w_attr3			h_white	 cyan	#
+w_attr4			h_cyan	 cyan	#
+w_attr5			h_white	 cyan	#
+w_attr6			h_white	 cyan	#
+w_attr7			h_cyan	 cyan	#
+w_attr8			h_white	 cyan	#
+w_attr9			h_white	 cyan	#
+w_attr10       		h_cyan	 cyan	#
+w_attr11       		h_white	 cyan	#
+
+# list
+w_list_active_item	h_cyan	 blue	# element, active object
+w_list_normal_item	cyan	 blue	# element, inactive object
+w_list_active_item_sel	h_yellow blue	# tagged element, active object
+w_list_normal_item_sel	h_white	 blue	# tagged element, inactive object
+w_list_active_item_cur	black	 green	# current element, active object
+w_list_normal_item_cur	black	 green	# current element, inactive object
+w_list_active_item_sc	h_yellow green	# current tagged element, active object
+w_list_normal_item_sc	h_white	 green	# current tagged element, inactive object
+w_list_info		h_white	 blue	# info-field of object
+
+# button
+w_button_active		h_white	 blue	# active button
+w_button_normal		white	 blue	# button
+
+# link
+w_ref_active		h_yellow blue	# active link
+w_ref_normal		h_yellow cyan	# link
+
+# input line
+w_input_active		h_white	 blue	# active input line
+w_input_normal		white	 blue	# input line
+
+# radio, check getbox
+w_getbox_active		h_white	 blue	# radio-check getbox, active
+w_getbox_normal		white	 blue	# radio-check getbox
+
+# ********************************************
+# terminal window (still does not working)
+# ********************************************
+t_active		h_white	 black	#
+t_text			white	 black	#
+

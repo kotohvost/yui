@@ -1,0 +1,408 @@
+<HEAD>
+<TITLE>Text editor</TITLE>
+</HEAD>
+
+<BODY>
+<I>GNU Info</I> pages are available <A HREF="info:(dir)">here</A>.
+
+<A NAME=Index><H3>Content</H3></A>
+Place cursor to the lightened text and press <I>Enter</I>.
+<UL>
+<LI><A HREF=#Help>Help system</A>
+<LI><A HREF="#Install">Installation</A>
+<LI><A HREF="#Args">Arguments</A>
+<LI><A HREF="#Keyboard">Keyboard</A>
+<LI><A HREF="#Menu">Menu</A>
+<LI><A HREF="#Windows">Windows operations</A>
+<LI><A HREF="#Files">Files operations</A>
+<LI><A HREF="#Blocks">Blocks operations</A>
+<LI><A HREF="#Undo">Undo/Redo</A>
+<LI><A HREF="#Find">Searching</A>
+<LI><A HREF="#Replace">Searching with replace</A>
+<LI><A HREF="#Debug">Debugger C/C++</A>
+<LI><A HREF="#UserMenu">User menu</A>
+<LI><A HREF="#Calculator">Calculator</A>
+<LI><A HREF="#SystemCommand">System command</A>
+<LI><A HREF="#Regexpr">Regular expressions</A>
+</UL>
+
+<A NAME="Help"><H3>Help system</H3></A>
+
+Help system is a contextual one. Help texts are written in syntax <I>HTML</I>
+and are in the file <I>yhelp.html</I>. If it is necessary you may alter the text
+if desired. While cursor placing to the lightened text and pressing
+<I>Enter</I> there will be the corresponding help page.
+<P>
+<TABLE BORDER>
+<CAPTION>You may use the following help keys</CAPTION>
+<tr><td><I>Tab</I> or <I>^J Down</I>	<td>to the next reference
+<tr><td><I>^J Up</I>			<td>to the previous reference
+<tr><td><I>^J Home</I>			<td>to the first reference
+<tr><td><I>^J End</I>			<td>to the last reference
+<tr><td><I>^J PgUp</I>			<td>to the text start
+<tr><td><I>^J PgDn</I>			<td>to the text end
+<tr><td><I>-</I>			<td>previous help page
+<tr><td><I>F6</I>			<td>searching
+<tr><td><I>F7</I>			<td>line block marking
+<tr><td><I>F8</I>			<td>column block marking
+<tr><td><I>^J +</I>			<td>marked block insert into clipboard
+</TABLE>
+<br>
+Help system provides looking through the pages <i>man</i> and <i>GNU info</i>.
+Utilite <i>whatis</i> is necessary for normal operation with the
+<i>man</i> pages. In case of its lack the simplest variant can be like this:
+<pre><i>
+       #!/bin/sh
+       echo "$1( )"
+</i></pre>
+There must be installed <i>GNU info</i> to work with <i>GNU info pages</i> in
+the system.
+
+<A NAME=Install><H3>Installation</H3></A>
+    Files list needed for <i>yui</i>:
+<PRE>
+	<b>y</b>              - editor itself (binary)
+	<b>yhelp.html</b>     - text of help system (html syntax)
+	<b>options</b>        - global options
+	<b>keymap</b>         - keyboard map
+	<b>colormap</b>       - color map
+	<b>highlight</b>      - highlight rules
+	<b>highlight_html</b> - list of HTML tags with some info
+</PRE>
+Binary file can be in any directory, showed in variable environment <b>PATH</b>.
+Other files usually is in the directory <b>/usr/local/lib/yui</b>
+or in <b>$HOME/.yui/</b>.
+You can show its other place with the help of variable environment <b>YUI_PATH</b>
+if necessary. The status file have name <b>$HOME/.yui/status/_current_work_path_</b>
+<P>
+Editor turning is done through editing files in <b>/usr/local/lib/yui</b>
+or in <b>$HOME/.yui/</b>
+<p>
+If the terminal has no a switching key to the nationale alphabet the
+switching can be done on <i>^N</i>.
+
+<A NAME=Args><H3>Arguments</H3></A>
+It is files names or URL for WWW-window. Possible options is:
+
+<ul>
+<dt><b>-r</b> - "read only" mode
+<dt><b>-b</b> - "binary" mode
+<dt><b>-M</b> - file is "formatted manual page"
+<dt><b>-m</b> - call <i>man</i>
+<dt><b>-w</b> - argument is URL
+</ul>
+
+<i>Examples</i>
+<pre>
+	./y main.c ../prog/list.h
+	./y <b>-r</b> ../prog/list.h <b>-M</b> termcap.0 <b>-b</b> /bin/ls
+
+	./y <b>-w</b> ftp://ftp.itk.ru
+	./y <b>-w</b> http://www.itk.ru <b>-w</b> telnet://last.itk.ru
+	./y <b>-w</b> man:termcap <b>-w</b> info:
+	./y <b>-w</b> file:
+
+	./y <b>-m</b> termcap
+	./y <b>-m</b> "termcap(5)"
+</pre>
+
+<A NAME=Keyboard><H3>Keyboard</H3></A>
+
+Keys description is given for keyboard apportionment by default (in upper
+case). <I>^</I> sign before a key means the pressing together with the key
+<I>Ctrl</I>.
+<P>
+Any operation can be done by any keys combination. <I>^J</I>, <I>^K</I>,
+<I>^J^K</I> keys specifically mean that the same key, pressed after them,
+will have different code
+<P>
+<TABLE BORDER>
+<CAPTION>General commands and windows control</CAPTION>
+<tr><td><I>^J^R</I>			<td>refresh screen
+<tr><td><I>^J^X</I>			<td>exit
+<tr><td><I>^K^X</I>			<td>exit with error
+<tr><td><I>Esc</I>, <I>^J Esc</I>, <I>^K Esc</I><td>menu
+<tr><td><I>F1</I>			<td>context help
+<tr><td><I>^J F1</I>			<td>previous help
+<tr><td><I>^K F1</I>			<td>help index
+<tr><td><I>^J 0</I> or <I>^J *</I>	<td>windows list
+<tr><td><I>^E</I> or <I>^J^E</I>	<td>next window
+<tr><td><I>^W</I> or <I>^J^W</I>	<td>previous window
+<tr><td><I>^C</I> or <I>^J^C</I>	<td>close window
+<tr><td><I>^J^D</I>			<td>change window size
+<tr><td><I>^J^A</I>			<td>change window place
+<tr><td><I>^J^V</I>			<td>window zooming
+<tr><td><I>F3</I>			<td>open exist file
+<tr><td><I>^J F3</I>			<td>open empty window
+<tr><td><I>^\</I> or <I>^J .</I>	<td>system command
+<tr><td><I>^J \</I> or <I>^K .</I>	<td>system command in terminal window
+<tr><td><I>^_</I> or <I>^J /</I> or <I>^J F10</I><td>user menu
+<tr><td><I>^J F5</I>			<td>man pages
+<tr><td><I>^J F7</I>			<td>terminal window
+<tr><td><I>^J F8</I>			<td>debugger
+<tr><td><I>^J F9</I>			<td>WWW window
+</TABLE>
+<br>
+<TABLE BORDER>
+<CAPTION>Edit window commands</CAPTION>
+<tr><td><I>F2</I>		<td>text saving
+<tr><td><I>^J F2</I>		<td>text saving in new file
+<tr><td><I>F4</I>		<td>go to line
+<tr><td><I>^J F4</I>		<td>line marker to go
+<tr><td><I>^G</I>		<td>matching symbol lower cursor
+<tr><td><I>^T</I>		<td>matching symbol upper cursor
+<tr><td><I>F7</I>		<td>line block marker
+<tr><td><I>F8</I>		<td>column block marker
+<tr><td><I>^P</I>		<td>block unmark
+<tr><td><I>F9</I>		<td>block copy
+<tr><td><I>F10</I>		<td>block move
+<tr><td><I>^J +</I>		<td>block copy to clipboard
+<tr><td><I>^J Del</I>		<td>block move to clipboard
+<tr><td><I>^J Ins</I>		<td>block copy from clipboard
+<tr><td><I>^Y</I>		<td>line removal
+<tr><td><I>^J^Y</I>		<td>block removal
+<tr><td><I>^J^B</I>		<td>set/unset breakpoint
+<tr><td><I>^K^V</I>		<td>viewing mode of space and tab symbols
+<tr><td><I>^K^L</I>		<td>reload text
+<tr><td><I>^K^R</I>		<td>set/unset "read only" mode
+<tr><td><I>^U</I>		<td>undo
+<tr><td><I>^R</I>		<td>redo
+<tr><td><I>F5</I>		<td>man pages on current word
+<tr><td><I>F6</I>		<td>searching
+<tr><td><I>^L</I>		<td>continue searching
+<tr><td><I>^J F6</I>		<td>searching with replace
+</TABLE>
+
+<A NAME=Menu><H3>Menu</H3></A>
+
+Menu has constant and variable parts. The constant one is always present,
+the variable part depends on a current window. Menu starts by pressing
+<I>Esc</I> or <I>^J^_lightened_letter_</I> in menu. Switching between menu
+parts is by <I>Tab</I>, <I>^J_Tab</I> keys. Moving inside menu is by cursor
+arrow keys or by pressing lightened letters.
+
+<A NAME=Windows><H3>Windows operations</H3></A>
+
+There are three types of windows: <I>editor</I>, <I>terminal</I> and
+<I>WWW-window</I>. At the same time there can be opened as many windows as
+possible, there can be some actions. In terminal windows it's possible to
+enter different commands, with can be used for output within programmes
+debugging. Terminal type in these windows - pc3. <I>WWW-window</I> is used
+to view hypertext (analog <I>lynx</I>). Help system uses this window.
+<P>
+The windows can be switched, changed in sizes, moved. It's possible to move
+window out of the screen.
+<P>
+In dialogue window <I>Windows list</I> there can be observed the list of
+all the open windows. An active window is marked by colour. Any window can
+be closed by <I>Del</I> key, some windows can be marked by <I>Ins</I> key
+and later the switching will be possible only between them. Any window
+can be activated by <I>Enter</I> key.
+<P>
+Keyboard apportionment <i>by default</i> is available <A HREF="#Keyboard">here</A>.
+
+<A NAME=Files><H3>Files operations</H3></A>
+
+Editor works with different files. If the file is not the text one, it's
+viewed/edited as lines with 64 symbols. Symbol with code &lt; 32 is marked
+by different colour and seeh as symbol <I>code+64</I>.
+<P>
+File select is done by dialogue window. With its help it's possible to
+view the content of any disk directory and to select necessary file.
+This window provides information on current directory state, files number,
+their total size, current file (size, creation date, etc).
+
+<A NAME=Blocks><H3>Block operations</H3></A>
+
+There are two types of blocks - line and column. Marking is done by setting
+two markers (trough menu or by keyboard). Text inside block is showed by
+different colour. Moving block borders is by cursor arrow keys with one
+set marker. Second marker setting fixes block borders. Block can be copied,
+moved and removed in current window, copied and moved into other windows
+with the help of clipboard, written on disk and read from disk.
+<P>
+Within copy of line block it will be insert between the line with cursor
+and upper line. Within copy of column block it will be insert into lines
+from the current one and from cursor position.
+<P>
+Move is equaled to copy, but in the previous place the block is removed.
+<P>
+Within copy or move into buffer, the block is copied into clipboard, in wich
+this done is saved also if block in text is removed. Block can be added to
+clipboard and itk previous content is saved. Clipboard can be edited.
+
+<A NAME=Undo><H3>Undo/Redo</H3></A>
+
+This operation provides reconstruction the changes which were made in the
+text within the current work. The reconstruction is backward step by step.
+Redo reconstructs the changes made by undo. There can be used undo
+optimization and the same operations will be done within one step.
+
+<A NAME=Find><H3>Searching</H3></A>
+
+Searching string and searching rules are defined by dialogue window.
+A searching string can be of <A HREF="#Regexpr">regular expression</A>.
+In the rules it is fixed the sensitivity - case, searching direction,
+searching place (text or block). The searching is possible in all the
+windows as editor, dialogue window and WWW - window.
+
+<A NAME=Replace><H3>Searching with replace</H3></A>
+
+Searching string, string for replace, searching rules and replace rules
+are difined by dialogue window. Searching string can be of
+<A HREF="#Regexpr">regular expression</A>. String for replace can have
+inside conventional signs of searching regular expressions like <i>\n</i>,
+where <i>n</i> - expression N.
+<PRE>
+    <I>Example:</I>
+
+	 Text string:          <I>I have a computer</I>
+	 Searching string:     <I>(I.*a) (c.*r)</I>
+	 String for replace:   <I>\1 good \2</I>
+
+    As a result there will be: <I>I have a good computer</I>
+</PRE>
+In a status line it is showen the number of changes made. Searching with
+replace is possible in all the windows as editor.
+
+<A NAME=Debug><H3>Debugger C/C++</H3></A>
+
+For more exact information learn <A HREF="man:?gdb()">GNU debugger</A>.
+<P>
+Editor allows to run <i>gdb</i> in terminal window and use output information
+to observe programme code. After the running it's necessary to define
+original programme name and terminal name, on which there will be programme
+output. Program name is defined by <i>file</i> command, for example
+<i>file _name_</i>, where <i>_name_</i> must be compiled with <i>-g</i> option.
+<P>
+For terminal definition it's necessary to fulfill successsful login and
+to run on it something like <i>sleep 3000</i> to prevent any desturbance.
+Then give <i>tty _terminal_name_</i> command, for example <i>tty /dev/ttyp5</i>.
+Now it's possible to set breakpoints and to run programme.
+<P>
+There is a possibility of automatical commands load in <i>gdb</i>. For that
+it's necessary to creat <i>.gdbinit</i> file, to describe commands in it
+and to set autoload flag in editor turning (through menu).
+<PRE>
+			Some gdb commands:
+
+       r[un] ........................ run/restart of programme
+       c[ontinue] ................... continue working
+       b[reakpoint] function_name ... breakpoint inside function
+       b file_name:line_number ...... breakpoint on line
+       s[tep] ....................... programmme step
+       n[ext] ....................... programme step outside of functions
+       u[ntil] function_name ........ work until function end
+       p[rint] expression ........... print expression meaning
+       q[uit] ....................... quit
+</PRE>
+
+<A NAME=UserMenu><H3>User menu</H3></A>
+
+This function provides a user to run programmes quickly, used in everyday
+work. User menu base - file <i>yui.mnu</i>, for example:
+<PRE><I>
+      yui: start
+	    yui
+      yui: compile
+	    make 2>&1 | tee _r
+	    #reload _r
+      yui: recompile
+	    make clean
+	    make 2>&1 | tee _r
+	    #reload _r
+      syncing disks
+	    sync
+      show processes
+	    ps -a
+      >Demos Commander
+	    deco
+</I></PRE>
+String which should be put to dialogue window, must not start with
+tabulation or space symbols. Strings starting with tabulation or space are
+system commands or editor commands, which will be run within selection
+of a corresponding string. <i>#reload _name_</i> command reloads file into
+editor window. If string of command description starts with a symbol <i>></i>,
+corresponding commands will be run in automatically created terminal
+window, which will be closed after finishing running the last command.
+<p>
+File <i>yui.mnu</i> searching is, first, in a current directory, otherwise
+in a user home directory. If there is no file it's given a corresponding
+warning.
+
+<A NAME=Calculator><H3>Calculator</H3></A>
+
+Calculator fulfills standard operations with figures with float point.
+It works in binary, octale, decimale and hexadecimale calculation systems.
+
+<p><i>Calculator registers</i>
+<p><I>X</I>(input), <I>Y</I>(output), <I>M</I>(memory)
+<p><i>Mathematical operations</i>
+<pre>
+    <I>+</I> - adding
+    <I>-</I> - substaraction
+    <I>*</I> - multiplication
+    <I>/</I> - division
+    <I>^</I> - raising to power
+    <I>%</I> - remainder of division
+</pre>
+<p><i>Bits operations</i>
+<pre>
+    <I>|</I> - OR
+    <I>!</I> - excluding OR
+    <I>&amp;</I> - AND
+    <I>~</I> - NOT
+</pre>
+
+<p><i>Other operations</i>
+<p><I>F10</I> - switcher between binary (BIN), octale (OCT), decimale (DEC)
+and hexadecimale (HEX) calculation systems.
+
+<p><I>PgDn</I> - put content from X register to M register
+<p><I>PgUp</I> - put content from M register to X register
+<p><I>^Y</I> - clean input line
+
+
+<A NAME=SystemCommand><H3>System command</H3></A>
+
+At putting command into input line and pressing <i>Enter</i> there will be
+executed the corresponding command. After its finishing a string will appear
+
+<PRE>                    <I>Press any key to return to YUI ...</I></PRE>
+
+and at pressing any key there will be return to editor.
+
+</BODY>
+
+<A NAME=Regexpr><H3>Regular expressions</H3></A>
+
+Special symbols in syntax of regular expressions:
+<pre>  <i>.</i></pre>
+Any symbol.
+<pre>  <i>\c</i></pre>
+<i>c</i> - any symbol besides figure and brackets.
+<pre>  <i>[...]</i></pre>
+One symbol among done in brackets. A pair of symbols in brackets, devided by
+symbol <i>-</i> mean a symbol from this diapason. If symbol <i>^</i> is the
+first among done in brackets, any symbol not among done in brackets
+corresponds regular expression. Inside brackets symbols <I>.</I>, <I>*</I>,
+<I>[</I> and <I>\</I> lose their special content.
+
+<pre>  <i>*</i></pre>
+Any number (and zero) of repetitions of regular expression before <i>*</i>.
+
+<pre>  <i>^</i></pre>
+Symbol of start string, if it's in regular expression start.
+
+<pre>  <i>$</i></pre>
+Symbol of string end, if it's at the end of regular expression.
+
+<pre>  <i>+</i></pre>
+One or more repetitions of regular expression before <i>+</i>.
+
+<pre>  <i>?</i></pre>
+One or none repetitions of regular expression before <i>?</i>.
+
+<pre>  <i>(RE)</i></pre>
+Regular expression <i>RE</i>. Symbol <i>|</i> means operation <i>OR</i> for two
+regular expressions.

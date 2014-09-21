@@ -1,0 +1,22 @@
+	/* $Id: CHANGES,v 1.2.4.3 2008/08/09 17:51:48 shelton Exp $ */
+
+10.08.08        Released version 3.2.04, which contains unbreak build for 64-bit
+CityCat		archs. Patch was made and provided by Alexey Rusanov. Also some
+3.2.04		changes in configure.in - now I pass arch as variable. Also added
+		file THANKS, which listed some special thanks and people, which
+                these thanks were received.
+
+24.07.07        Released version 3.2.03, which contains some bugfixes to avoid
+CityCat		build break on -CURRENT. Also some warnings were eliminated.
+3.2.03		Also, instead of tmpnam() we now use mkstemp() to make temp
+		file to file saving.
+
+18.01.07        I have compeltely rewrote man page y.1 and added files BUGS
+CityCat		with discovered bugs list and TODO with supposed future works
+
+03.03.06	So, king was dead, long live the king! This day I take control on
+CityCat		this really great program, which I have use for ages and now this
+3.2.1		file I have edited with it. But since 2000 was flowed so many
+                water... At least I'd like to migrate this building under autotools
+                build factory and throw out a web-client. I think, console-based
+                web-clients is a: links, lynx, and so on...

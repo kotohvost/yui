@@ -1,0 +1,79 @@
+# This file contains common editor options. Personal file can lies at $HOME/.yui
+# common file - at @LIBPATH@/yui or at path, which specified at YUI_HOME
+# environment variable.
+# '#' is a comment char, empty lines will skipped
+#
+# Format is: <keyword> <key value>. Values can be:
+# boolean - true/false
+# digital - digits
+# line - chars
+# list - predefined list of strings/digits
+#
+# Repeated values will be ignored. You can re-read changes in this file
+# without leaving the editor by Reload->Options
+
+#terminal_info	terminfo	# terminal initialization database
+terminal_info	termcap		# termcap / terminfo
+
+backup_file		on	# creating backup files, boolean
+
+undo_optimize		on	# optimize undo data, boolean
+undo_steps		100	# quantity of undo steps, digital
+
+autosave		off	# autosave, boolean
+autosave_time		300	# autosave time, seconds, digital
+
+auto_wrap		off	# autowrap when text input, boolean
+wrap_in_word		off	# autowrap inside word, boolean
+line_length		72	# line length, when auto wrap will active, digital
+paragraph_offset	8	# offset to make new paragraph
+
+expand_string		off	# expand line when autowrap to 'line_length'
+				# boolean
+
+strip_spaces		on	# strip tailored spaces/tabs when save,boolean
+
+optimal_fill		off	# replace starting spaces to tabs, boolean
+
+highlight_syntax	on	# syntax highlight, boolean
+
+gdb_autoload		on	# autoload ".gdbinit" contents, when debug session
+				# started, boolean
+
+status_file		on	# keep status file (in $HOME/.yui/status), boolean
+
+status_bar		on	# switch on/off status bar, boolean
+menu_bar		off	# switch on/off menu, boolean
+window_border		off	# switch on/off window border, boolean
+
+tabulation		8	# tab steps, 2, 4 or 8
+
+monitor			color	# monitor: color, bw (black-white), laptop (TFT)
+
+language		english	# program language: english / russian
+				# All another languages are unavailable
+
+terminal_shell		/bin/sh	# terminal shell
+terminal_history	100	# terminal history
+
+home_url		http://127.0.0.1	# homepage URL
+
+
+background_symbol	32	# background char under windows
+inputline_fill_char	32	# filler char in input lines
+inputline_history	20	# input lines history size
+
+# Translation tables for output in appropriate windows
+# Available tables:
+# 866-koi8 - From Russian DOS codepage to Russian KOI8 coding
+# 1251-koi8 - From Russian Windows codepage to Russian KOI8 coding
+# main-koi8
+# koi8-866 - From Russian KOI8 coding to Russian DOS codepage
+# koi8-1251 - From Russian KOI8 coding to Russian Windows codepage
+# koi8-main
+# none
+
+trans_edit		none
+trans_web		none
+trans_term		none
+trans_debug		none

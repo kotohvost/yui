@@ -1,0 +1,82 @@
+# $Id: Makefile.in,v 1.2.2.1 2007/07/24 11:43:11 shelton Exp $
+#
+# Program version
+PKGNAME		= @PACKAGE_NAME@
+PKGVERSION	= @PACKAGE_VERSION@
+
+# Distribution name
+DSTNAME		= $(PKGNAME)-$(PKGVERSION)
+#
+# Executable name
+BINARY		= yui
+#
+# Binaries list
+BINS		= prg
+
+prefix		= @prefix@
+exec_prefix	= @exec_prefix@
+
+INSTDIR		= @bindir@
+MANDIR		= @mandir@
+LIBDIR		= @libdir@
+
+# Tools and additions
+HOMEDIR		= @homedir@
+RM		= @RM@
+STRIP		= @STRIP@
+TAR		= @TAR@
+CHMOD		= @CHMOD@
+MV		= @MV@
+CP		= @CP@
+LN		= @LN@
+CVS2CL		= @CVS2CL@
+INSTALL		= @INSTALL@
+
+dirs = term task tscr twww tyui
+
+all:	$(BINS)
+
+prg:
+	pwd=`pwd`; for dir in $(dirs) ; do  cd $$pwd/$$dir && $(MAKE) || break; done
+
+clean:
+	pwd=`pwd`; for dir in $(dirs) ; do cd $$pwd/$$dir && $(MAKE) clean; done
+
+FILES = colormap colortrans *.html highlight* keymap options
+
+distclean: clean
+	-$(RM) -f Makefile config.status config.cache config.log configure.lineno config.h configure
+	pwd=`pwd`; for dir in $(dirs) ; do cd $$pwd/$$dir && $(MAKE) distclean; done
+
+realclean: distclean
+	-$(RM) -f TAGS
+
+changelog:
+	$(CVS2CL) -r -b -t -P -S
+
+dist: realclean
+	-$(RM) -f $(DSTNAME).tar.bz2
+	(cd .. \
+	   && $(RM) -f $(DSTNAME) && $(LN) -s $(BINARY) $(DSTNAME) \
+	   && $(TAR) chyf $(DSTNAME).tar.bz2 $(DSTNAME) && cd $(DSTNAME))
+	$(CHMOD) go-w,a+r *
+	-@if test ! -d $(HOMEDIR)/backup; then \
+		echo "creating $(HOMEDIR)/backup"; \
+		mkdir $(HOMEDIR)/backup; \
+	fi
+	-@if test ! -d $(HOMEDIR)/backup/current; then \
+		echo "creating $(HOMEDIR)/backup/current"; \
+		mkdir $(HOMEDIR)/backup/current; \
+	fi
+	(cd .. && $(CP) $(DSTNAME).tar.bz2 $(HOMEDIR)/backup \
+	       && $(MV) $(DSTNAME).tar.bz2 $(HOMEDIR)/backup/current)
+
+install: all
+	$(INSTALL) -d -m 755 $(INSTDIR)
+	$(INSTALL) -d -m 755 $(MANDIR)/man1
+	$(INSTALL) -d -m 755 $(LIBDIR)/yui
+	$(STRIP) tyui/y
+	$(INSTALL) -m 755 tyui/y $(INSTDIR)/y
+	$(INSTALL) -m 644 y.1 $(MANDIR)/man1/y.1
+	cd doc && $(CP) $(FILES) $(LIBDIR)/yui
+	-cd $(LIBDIR)/yui && $(LN) -s help_eng.html yhelp.html

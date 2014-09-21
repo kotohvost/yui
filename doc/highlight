@@ -1,0 +1,381 @@
+# Этот файл (под именем highlight) задает правила подсветки зарезервированных
+# слов в текстовых файлах, может находиться либо в /usr/ local/lib/yui,
+# либо в каталоге, указанном в переменной окружения YUI_PATH, либо в
+# $HOME/.yui (под таким же именем). Если строка начинается со знака '#',
+# то зто комментарий, пустые строки игнорируются.
+
+# Строка, начинающаяся со слова "extension" задает имя файла после "."
+# (расширение), к файлу с таким именем будет применяться подсветка. Таких
+# строк может быть несколько подряд, соответственно правила подсветки
+# будут применяться ко всем таким файлам.
+
+# Строка, начинающаяся со слова "punctuate" задает правило подсветки знаков
+# препинания и скобок, возможный параметр - yes/no, по умолчанию yes.
+
+# Строки, начинающиеся со слов "comment_eol", "comment_start", "comment_end"
+# задают последовательности символов, ограничивающие комментарии в текстах
+# программ.
+# "comment_eol"   - комментарий до конца строки ("//" в C++, "#" в perl)
+# "comment_start" - начало потокового комментария ("/*" в C/C++)
+# "comment_end"   - конец потокового комментария ("*/" в C/C++)
+# Допустимые символы в таких последовательностях: '/', '*', '#', ';' и '!'
+
+# Строка, начинающаяся со слова "tag" задает слово, которое необходимо
+# подсвечивать. С помощью таких строк описываются все слова, которые
+# должны быть подсвечены.
+
+# После группы строк "tag ..." снова может идти группа "extension ..." и т.д.
+# Символы, допустимые к использованию в строках "tag ..." - большие и маленькие
+# буквы латиницы и символ '_',
+
+# *********************************************************
+# стандартные расширения для файлов с текстами C/C++
+# *********************************************************
+extension h
+extension c
+extension C
+extension cc
+extension CC
+extension cpp
+extension CPP
+extension y
+
+# подсветка символов пунктуации и скобок
+punctuate yes
+
+# комментарии
+comment_eol	//
+comment_start	/*
+comment_end	*/
+
+# операторы
+tag break
+tag case
+tag continue
+tag default
+tag do
+tag else
+tag for
+tag goto
+tag if
+tag return
+tag switch
+tag while
+
+# типы данных
+tag char
+tag double
+tag enum
+tag float
+tag int
+tag long
+tag short
+tag struct
+tag union
+tag unsigned
+tag void
+
+# классы памяти
+tag auto
+tag extern
+tag register
+tag static
+
+# расширения C++
+tag class
+tag const
+tag delete
+tag friend
+tag inline
+tag new
+tag operator
+tag overload
+tag public
+tag protected
+tag private
+tag signed
+tag this
+tag virtual
+tag volatile
+
+# *********************************************************
+# стандартные расширения для текстов YUCL
+# *********************************************************
+extension yh
+extension yc
+
+# подсветка символов пунктуации и скобок
+punctuate yes
+
+# комментарии
+comment_eol	//
+comment_start	/*
+comment_end	*/
+
+#операторы
+tag break
+tag case
+tag continue
+tag default
+tag do
+tag else
+tag error
+tag errortrap
+tag for
+tag if
+tag param
+tag return
+tag switch
+tag trap
+tag while
+
+# классы памяти
+tag array
+tag date
+tag func
+tag global
+tag local
+tag public
+tag string
+
+# *********************************************************
+# стандартные расширения для текстов PERL
+# *********************************************************
+extension pl
+extension PL
+
+# подсветка символов пунктуации и скобок
+punctuate yes
+
+# комментарии
+comment_eol	#
+
+# операторы
+tag if
+tag elsif
+tag else
+tag next
+tag last
+tag for
+tag while
+tag shift
+
+# подпрограммы, пакеты, модули
+tag bless
+tag caller
+tag do
+tag goto
+tag import
+tag no
+tag package
+tag require
+tag return
+tag sub
+tag tie
+tag untie
+tag use
+
+# арифметические функции
+#tag abs
+#tag atan2
+#tag cos
+#tag exp
+#tag int
+#tag log
+#tag rand
+#tag sin
+#tag sqrt
+#tag srand
+#tag time
+
+## функции преобразования
+#tag chr
+#tag gmtime
+#tag hex
+#tag localtime
+#tag oct
+#tag ord
+#tag vec
+
+## строковые функции
+#tag chomp
+#tag chop
+#tag crypt
+#tag eval
+#tag index
+#tag length
+#tag lc
+#tag lcfirst
+#tag quotemeta
+#tag rindex
+#tag substr
+#tag uc
+#tag ucfirst
+
+## функции обработки массивов и списков
+#tag delete
+#tag each
+#tag exists
+#tag grep
+#tag join
+#tag keys
+#tag map
+#tag pop
+#tag push
+#tag reverse
+#tag scalar
+#tag shift
+#tag sort
+#tag splice
+#tag split
+#tag unshift
+#tag values
+
+## опреации с файлами
+#tag chmod
+#tag chown
+#tag truncate
+#tag link
+#tag lstat
+#tag mkdir
+#tag readlink
+#tag rename
+#tag rmdir
+#tag stat
+#tag symlink
+#tag unlink
+#tag utime
+
+## ввод-вывод
+#tag binmode
+#tag close
+#tag dbmclose
+#tag dbmopen
+#tag eof
+#tag fcntl
+#tag fileno
+#tag flock
+#tag getc
+#tag ioctl
+#tag open
+#tag pipe
+#tag print
+#tag printf
+#tag read
+#tag seek
+#tag select
+#tag sprintf
+#tag sysread
+#tag syswrite
+#tag tell
+
+## чтение каталогов
+#tag closedir
+#tag opendir
+#tag readdir
+#tag rewinddir
+#tag seekdir
+#tag telldir
+
+## взаимодействие с системой
+#tag alarm
+#tag chdir
+#tag chroot
+#tag die
+#tag exec
+#tag exit
+#tag fork
+#tag getlogin
+#tag getpgrp
+#tag getppid
+#tag getpriority
+#tag glob
+#tag kill
+#tag setpgrp
+#tag setpriority
+#tag sleep
+#tag syscall
+#tag system
+#tag times
+#tag umask
+#tag wait
+#tag waitpid
+#tag warn
+
+## организация сетей
+#tag accept
+#tag bind
+#tag connect
+#tag getpeername
+#tag getsockname
+#tag getsockopt
+#tag listen
+#tag recv
+#tag send
+#tag setsockopt
+#tag shutdown
+#tag socket
+#tag socketpair
+
+## межпроцессное взаимодействие в System V
+#tag msgctl
+#tag msgget
+#tag msgsnd
+#tag msgrcv
+#tag semctl
+#tag semget
+#tag semop
+#tag shmctl
+#tag shmget
+#tag shmread
+#tag shmwrite
+
+## прочее
+#tag defined
+#tag do
+#tag dump
+#tag eval
+#tag local
+#tag my
+#tag ref
+#tag reset
+#tag scalar
+#tag undef
+#tag wantarray
+
+## извлечение информации из системных файлов
+#tag passwd
+#tag endpwent
+#tag getpwent
+#tag getpwnam
+#tag getpwuid
+#tag setpwent
+#tag group
+#tag endgrent
+#tag getgrgid
+#tag getgrnam
+#tag getgrent
+#tag hosts
+#tag endhostent
+#tag gethostbyaddr
+#tag gethostbyname
+#tag gethostent
+#tag sethostent
+#tag networks
+#tag endnetent
+#tag getnetbyaddr
+#tag getnetbyname
+#tag getnetent
+#tag setnetent
+#tag services
+#tag endservent
+#tag getservbyname
+#tag getservbyport
+#tag getervent
+#tag setservent
+#tag protocols
+#tag endprotoent
+#tag getprotobyname
+#tag getprotobynumber
+#tag getprotoent
+#tag setprotoent

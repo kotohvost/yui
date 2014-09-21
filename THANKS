@@ -1,0 +1,6 @@
+	/* $Id: THANKS,v 1.1.2.1 2008/08/09 17:51:48 shelton Exp $ */
+
+Special thanks for:
+
+Alexander Lunyev - for first patch to complie under FreeBSD
+Alexey Rusanov - for patch to unbreak build under 64-bit archs

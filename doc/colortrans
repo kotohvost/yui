@@ -1,0 +1,37 @@
+# This file contained editor color translation tables. They will need when
+# color attributes are different for different terminals.
+# Personal file can lies into a $HOME/.yui path, common file - in
+# @LIBPATH@/yui or in path, specified in a YUI_PATH environment variable.
+#
+# You should define translation table for each terminal type. Line, started
+# from "terminal" declared terminal type, tables definitions follows.
+# "colormap_fg" - color translation for chars
+# "colormap_bg" - color translation for background
+#
+# color order was taken from 'terminfo' database
+#
+#    color   |  number
+#    --------|-------     -----------|-------
+#    black   |  0         hi_black   |  8
+#    red     |  1         hi_red     |  9
+#    green   |  2         hi_green   |  A
+#    yellow  |  3         hi_yellow  |  B
+#    blue    |  4         hi_blue    |  C
+#    magenta |  5         hi_magenta |  D
+#    cyan    |  6         hi_cyan    |  E
+#    white   |  7         hi_white   |  F
+#
+# Sample:
+# Change background fron blue (default) to red: in colormap_bg instead of
+# 01234567 placing 04231567 (side effect - instead red we receive blue :-) )
+#
+# When your color order is different from default, you should setup your
+# properly order manually.
+
+terminal linux xterm-color rxvt cons25 cons25r
+colormap_fg		0123456789ABCDEF
+colormap_bg		01234567
+
+terminal ansi pc3c
+colormap_fg		0123465789ABCEDF
+colormap_bg		01234657

@@ -1,0 +1,110 @@
+#
+# Yui next generation - yn. Based on yui version 3.1.15 by Sergey Rozenfeld
+# Distirbuted under BSD lisense.
+#
+# $Id: Makefile.in,v 3.1.2.2 2008/08/09 17:51:48 shelton Exp $
+
+SRCS	=\
+	w3win.cc\
+	w3man.cc\
+	w3form.cc\
+	w3style.c\
+	w3alert.cc\
+	HText.cc\
+	HTML.cc\
+	HTTP.cc\
+	HTAccess.c\
+	HTTelnet.c\
+	HTFormat.c\
+	HTFTP.c\
+	HTWriter.c\
+	HTNews.c\
+	HTGopher.c
+
+OBJS	=\
+	w3win.o\
+	w3man.o\
+	w3form.o\
+	w3style.o\
+	w3alert.o\
+	HText.o\
+	HTML.o\
+	HTTP.o\
+	HTAccess.o\
+	HTTelnet.o\
+	HTFormat.o\
+	HTFTP.o\
+	HTWriter.o\
+	HTNews.o\
+	HTGopher.o
+
+INC_W	= ./www/lib
+INC_T	= ../task
+INC_A	= ../tscr
+INC_E	= ../tyui
+
+LIB_W	= ./www/lib/obj/libWWW.a
+LIBS	= ../task/libscrn.a ../task/libtask.a ../term/libtcaps.a
+LIB_A	= ../tscr/libappl.a
+LIB_E	= ../tyui/libedit.a
+
+LIB	= libw3t.a
+
+SYSTEM	= -D@SYSTEM@
+
+# Compiler
+CC	= @CC@
+
+@SET_MAKE@
+
+# Tools
+RM=	@RM@
+AR=	@AR@
+RANLIB=	@RANLIB@
+SORT=	@SORT@
+CP=	@CP@
+MAKE=	@MAKE@
+
+#DMALLOC = -DDMALLOC
+#LDMALLOC = -ldmalloc -ldmalloc++
+
+CFLAGS	= $(SYSTEM) $(DMALLOC) -I$(INC_W) -I$(INC_T) -I$(INC_A) -I$(INC_E) @CFLAGS@
+
+.SUFFIXES: .o .cc
+
+.cc.o:
+	$(CC) $(CFLAGS) -c $<
+
+.c.o:
+	$(CC) $(CFLAGS) -c $<
+
+all:	$(LIB) $(LIB_W)
+
+wtest:	main.o $(LIB) $(LIB_W) $(LIB_A) $(LIBS) $(LIB_E)
+	$(CC) $(CFLAGS) -o wtest main.o $(LIB) $(LIB_W) $(LIB_E) $(LIB_A) $(LIBS) $(MDEBUG) -lm $(LDMALLOC)
+
+lib:	$(LIB)
+
+$(LIB): $(OBJS)
+	-$(RM) -f $@
+	$(AR) rv $@ $(OBJS)
+	$(RANLIB) $@
+
+$(LIB_W):
+	cd www ; export MAKEFLAGS=''; $(MAKE)
+
+clean:
+	-$(RM) -f *.o *.a *core* wtest
+	cd www; export MAKEFLAGS=''; $(MAKE) clean
+
+distclean: clean
+	-$(RM) -f Makefile
+	cd www; export MAKEFLAGS=''; $(MAKE) distclean
+
+hash:
+	../task/hashextract $(SRCS) main.cc | $(SORT) -u > _hashcode.h
+	$(CMP) _hashcode.h hashcode.h || $(CP) _hashcode.h hashcode.h
+
+# DO NOT DELETE
+
+

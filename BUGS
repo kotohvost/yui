@@ -1,0 +1,7 @@
+$Id: BUGS,v 3.1.4.1 2007/07/24 11:40:02 shelton Exp $
+
+Identified, but not detected bugs
+---------------------------------
+
+1. Cannot use for cron tabs editing - crons says "File must edited in place..."
+2. Crash, when try to edit file in SMBFS mounted share, even R/W access

@@ -1,0 +1,122 @@
+#
+# Yui next generation - yn. Based on yui version 3.1.15 by Sergey Rozenfeld
+# Distirbuted under BSD lisense.
+#
+# $Id: Makefile.in,v 3.1.2.1 2007/07/24 11:49:49 shelton Exp $
+#
+
+OBJ_LIB	= yui1.o yui2.o yui3.o gdb.o
+SRC_LIB = yui1.cc yui2.cc yui3.cc gdb.cc
+
+OBJ	= usermenu.o calc.o
+SRC	= usermenu.cc calc.cc
+
+INC1	= ../task
+INC2	= ../tscr
+LIB_A	= ../tscr/libappl.a
+LIBS	= ../task/libscrn.a ../task/libtask.a ../term/libtcaps.a
+
+LIB = libedit.a
+
+INC_W	= ../twww
+LIB_W	= ../twww/libw3t.a
+LIB_W3	= ../twww/www/lib/libWWW.a
+
+CFL_APP	= -I$(INC_W) -D_USE_WWW_
+LIB_APP	= $(LIB_W) $(LIB_W3)
+
+# FreeBSD
+SYSTEM = -D@SYSTEM@
+
+#DMALLOC = -DDMALLOC
+#LDMALLOC = -ldmalloc -ldmalloc++
+
+# Compiler
+CPP=	@CXX@
+
+# Tools
+RM=	@RM@
+RANLIB=	@RANLIB@
+AR=	@AR@
+CMP=	@CMP@
+SORT=	@SORT@
+CP=	@CP@
+STRIP=	@STRIP@
+
+CFLAGS  = $(SYSTEM) $(DMALLOC) -D_USE_MMAP_ -I$(INC1) -I$(INC2) $(CFL_APP) @CFLAGS@
+
+y:	main.o copyrigh.h $(LIB) $(OBJ) $(LIB_APP) $(LIB_A) $(LIBS)
+	$(CPP) $(CFLAGS) -o y main.o $(LIB) $(OBJ) $(LIB_A) $(LIBS) $(LIB_APP) $(MDEBUG) -lm $(LDMALLOC)
+
+$(LIB): $(OBJ_LIB)
+	-$(RM) -f $@
+	$(AR) rv $@ $(OBJ_LIB)
+	$(RANLIB) $@
+
+copyrigh.h: copyrigh.txt coder
+	./coder copyrigh.txt
+
+coder:	coder.c
+	$(CC) coder.c -o coder
+	$(STRIP) coder
+
+bitmap:
+	$(CC) -g -DEXAMPLE bitmap.cc -o bitmap
+
+clean:
+	-$(RM) -f *.o *.bak *.b *.a core* y coder copyrigh.h _hashcode.h
+
+distclean: clean
+	-$(RM) -f Makefile
+
+hash:	../task/hashextract $(SRC_LIB) $(SRC) main.cc
+	../task/hashextract $(SRC_LIB) $(SRC) main.cc | $(SORT) -u > _hashcode.h
+	$(CMP) _hashcode.h hashcode.h || $(CP) _hashcode.h hashcode.h
+
+.SUFFIXES: .cc
+
+.cc.o:
+	$(CPP) $(CFLAGS) -c $<
+
+# DO NOT DELETE
+
+yui1.o: ../tscr/menu.h hashcode.h ../tscr/listbox.h ../task/array.h
+yui1.o: ../tscr/window.h ../tscr/getobj.h ../task/collect.h
+yui1.o: ../task/keycodes.h ../task/screen.h ../task/point.h ../task/langs.h
+yui1.o: ../tscr/keymap.h ../tscr/status.h ../tscr/filebox.h ../tscr/modal.h
+yui1.o: ../tscr/dialog.h ../tscr/visual.h ../tscr/dir.h ../tscr/filepath.h
+yui1.o: ../tscr/program.h ../task/task.h ../task/list.h ../task/message.h
+yui1.o: ../task/keytask.h ../tscr/tag.h yui.h
+yui2.o: ../tscr/status.h ../tscr/window.h ../tscr/getobj.h ../task/collect.h
+yui2.o: ../task/keycodes.h ../task/screen.h ../task/point.h ../task/langs.h
+yui2.o: ../tscr/keymap.h ../tscr/program.h ../task/task.h ../task/list.h
+yui2.o: ../task/message.h hashcode.h ../task/keytask.h yui.h ../task/array.h
+yui3.o: ../task/reg_expr.h ../tscr/dialog.h ../tscr/window.h ../tscr/getobj.h
+yui3.o: ../task/collect.h ../task/keycodes.h ../task/screen.h ../task/point.h
+yui3.o: ../task/langs.h ../tscr/keymap.h ../tscr/visual.h ../tscr/status.h
+yui3.o: ../tscr/i_lines.h ../tscr/listbox.h ../task/array.h ../tscr/program.h
+yui3.o: ../task/task.h ../task/list.h ../task/message.h hashcode.h
+yui3.o: ../task/keytask.h yui.h
+gdb.o: ../tscr/program.h ../task/task.h ../task/list.h ../task/message.h
+gdb.o: hashcode.h ../task/collect.h ../task/keytask.h ../task/keycodes.h
+gdb.o: ../task/point.h ../tscr/keymap.h ../task/langs.h ../tscr/dir.h
+gdb.o: ../tscr/filepath.h gdb.h ../task/reg_expr.h ../tscr/yterm.h
+gdb.o: ../tscr/window.h ../tscr/getobj.h ../task/screen.h ../tscr/menu.h
+gdb.o: ../tscr/listbox.h ../task/array.h yui.h
+usermenu.o: usermenu.h ../tscr/listbox.h ../task/array.h ../tscr/window.h
+usermenu.o: ../tscr/getobj.h ../task/collect.h ../task/keycodes.h
+usermenu.o: ../task/screen.h ../task/point.h ../task/langs.h ../tscr/keymap.h
+usermenu.o: hashcode.h
+calc.o: ../tscr/listbox.h ../task/array.h ../tscr/window.h ../tscr/getobj.h
+calc.o: ../task/collect.h ../task/keycodes.h ../task/screen.h ../task/point.h
+calc.o: ../task/langs.h ../tscr/keymap.h calc.h ../tscr/dialog.h
+calc.o: ../tscr/visual.h hashcode.h
+main.o: ../tscr/menu.h hashcode.h ../tscr/listbox.h ../task/array.h
+main.o: ../tscr/window.h ../tscr/getobj.h ../task/collect.h
+main.o: ../task/keycodes.h ../task/screen.h ../task/point.h ../task/langs.h
+main.o: ../tscr/keymap.h ../tscr/status.h ../tscr/filebox.h ../tscr/modal.h
+main.o: ../tscr/dialog.h ../tscr/visual.h ../tscr/dir.h ../tscr/filepath.h
+main.o: ../tscr/tag.h ../task/term.h ../tscr/keybox.h ../tscr/i_lines.h gdb.h
+main.o: ../task/reg_expr.h ../tscr/program.h ../task/task.h ../task/list.h
+main.o: ../task/message.h ../task/keytask.h ../tscr/yterm.h yui.h appl.h
+main.o: usermenu.h calc.h version.h copyrigh.h

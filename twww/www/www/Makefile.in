@@ -1,0 +1,15 @@
+#	BSDI	Makefile,v 1.1.1.1 1995/01/06 00:49:41 polk Exp
+
+PROG=	www
+SRCS=	DefaultStyles.c GridStyle.c GridText.c HTBrowse.c
+CFLAGS+= -I${.CURDIR}/../lib @CFLAGS@
+LDADD+=	${.CURDIR}/../lib/obj/libWWW.a
+DPADD+=	${.CURDIR}/../lib/obj/libWWW.a
+NOMAN=	noman
+
+RM=	@RM@
+
+distclean:
+	-$(RM) -f Makefile
+
+.include <bsd.prog.mk>

@@ -1,0 +1,11 @@
+$Id: TODO,v 3.1.4.1 2007/07/24 11:43:11 shelton Exp $
+
+To do with this and next releases
+---------------------------------
+
+1. Identify functions and switch off useless WWW functions
+2. Switch "Help" windows to ordinary type from modal
+3. Add ability to save session without exit editor
+4. Add more syntax highlight atoms
+5. Add gettext API to load multi-language support and separate messages
+   into a .mo files, initially only with en and ru locales

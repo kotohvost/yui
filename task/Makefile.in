@@ -1,0 +1,114 @@
+#
+# Yui next generation - yn. Based on yui version 3.1.15 by Sergey Rozenfeld
+# Distirbuted under BSD lisense.
+#
+# $Id: Makefile.in,v 3.1.2.2 2008/08/09 17:51:48 shelton Exp $
+#
+#
+SRCS =  task.cc hash.cc list.cc test.cc testrpc.cc sema.cc array.cc\
+	collect.cc sortcol.cc keytask.cc keysema.cc term.cc screen.cc\
+	regexpr.c reg_expr.cc iobuf.cc yuimacro.tab.c message.cc
+OBJS = task.o hash.o list.o sema.o collect.o sortcol.o regexpr.o reg_expr.o\
+	iobuf.o message.o array.o
+
+OBJSCR = term.o keytask.o keysema.o screen.o
+HS = message.h
+
+LIB	= libtask.a
+LIBTERM	= ../term/libtcaps.a
+LIBSCR	= libscrn.a
+
+# FreeBSD
+SYSTEM	= @SYSTEM@
+
+# Architecture
+ARCH = @ARCH@
+
+#DMALLOC	= -DDMALLOC
+#LDMALLOC = -ldmalloc -ldmalloc++
+
+CDEFS =  -D$(SYSTEM) -D$(ARCH) -I../term @DEFS@
+CFLAGS = $(DMALLOC) @CFLAGS@
+
+# Compiler
+CPP=	@CXX@
+
+# Tools
+RM=	@RM@
+LEX=	@LEX@
+RANLIB=	@RANLIB@
+AR=	@AR@
+CMP=	@CMP@
+SORT=	@SORT@
+CP=	@CP@
+
+.SUFFIXES: .o .cc
+.cc.o:
+	$(CPP) $(CDEFS) $(CFLAGS) -c $<
+.c.o:
+	$(CC) $(CDEFS) $(CFLAGS) -c $<
+
+all: hashextract test
+
+test:  test.o $(LIB) $(LIBSCR) $(LIBTERM)
+	$(CPP) test.o $(OBJSCR) $(LIBTERM) $(OBJS) -o test $(LDMALLOC)
+
+iotest:  iotest.o $(LIB)
+	$(CPP) -o iotest iotest.o $(LIB) $(LDMALLOC)
+
+scrtest: scrtest.o $(LIBSCR) $(LIBTERM)
+	$(CPP) -o scrtest scrtest.o $(LIBSCR) $(LIBTERM) $(LDMALLOC)
+
+clean:
+	-$(RM) -f *.o *.a test scrtest iotest stktest hashextract _hashcode.h lex.hash.c
+
+distclean: clean
+	-$(RM) -f Makefile
+
+$(LIB): $(OBJS)
+	-$(RM) $@
+	$(AR) rv $@ $(OBJS)
+	$(RANLIB) $@
+
+$(LIBSCR): $(OBJSCR)
+	-$(RM) $@
+	$(AR) rv $@ $(OBJSCR)
+	$(RANLIB) $@
+
+_hashcode.h: hashextract $(SRCS) $(HS)
+	hashextract $(SRCS) $(HS)  | $(SORT) -u > _hashcode.h
+	$(CMP) _hashcode.h hashcode.h || $(CP) _hashcode.h hashcode.h
+
+hashextract: lex.hash.o
+	$(CC) -O -o hashextract lex.hash.o
+
+lex.hash.o: lex.hash.c
+
+lex.hash.c: hasher.lex
+	$(LEX) -Phash hasher.lex
+
+yuimacro.tab.o: yuimacro.tab.c
+	$(CC) -c yuimacro.tab.c
+
+# DO NOT DELETE
+
+task.o: task.h list.h message.h hashcode.h collect.h
+list.o: list.h
+test.o: task.h list.h message.h hashcode.h collect.h iobuf.h regexpr.h
+test.o: keytask.h keycodes.h keysema.h screen.h point.h langs.h reg_expr.h
+test.o: term.h
+testrpc.o: task.h list.h message.h hashcode.h collect.h keytask.h keycodes.h
+testrpc.o: screen.h point.h langs.h
+sema.o: task.h list.h message.h hashcode.h collect.h
+array.o: array.h
+collect.o: collect.h
+sortcol.o: collect.h
+keytask.o: task.h list.h message.h hashcode.h collect.h keytask.h keycodes.h
+keysema.o: task.h list.h message.h hashcode.h collect.h keysema.h keycodes.h
+term.o: term.h
+screen.o: screen.h point.h langs.h
+regexpr.o: regexpr.h
+reg_expr.o: reg_expr.h regexpr.h
+iobuf.o: iobuf.h list.h regexpr.h task.h message.h hashcode.h collect.h
+yuimacro.tab.o: collect.h
+message.o: message.h list.h hashcode.h

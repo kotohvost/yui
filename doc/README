@@ -1,0 +1,26 @@
+Files list needed for yui:
+
+	y              - editor itself (binary)
+	yhelp.html     - text of help system (html syntax)
+	options        - global options
+	keymap         - keyboard map
+	colormap       - color map
+	highlight      - highlight rules
+	highlight_html - list of HTML tags with some info
+
+Binary file can be in any directory, showed in variable environment
+PATH. Other files usually is in the directory /usr/local/lib/yui or in
+$HOME/.yui/. You can show its other place with the help of variable
+environment YUI_PATH if necessary. The status file have name
+$HOME/.yui/status/_current_work_path_
+
+Editor turning is done through editing files in /usr/local/lib/yui or in
+$HOME/.yui/
+
+If the terminal has no a switching key to the nationale alphabet the
+switching can be done on ^N.
+
+____
+Serg
+____________________________________
+Written on "micro$oft free" computer

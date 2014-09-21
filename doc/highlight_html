@@ -1,0 +1,134 @@
+# Файл содержит описания тегов html, используется для подсветки тегов
+# и их аргументов в окне редактора, может находиться либо в
+# /usr/local/lib/yui, либо в каталоге, указанном в переменной окружения
+# YUI_PATH, либо в $HOME/.yui (под таким же именем).
+# При отсутствии зтого файла обрабатывается встроенный список тегов HTML.
+# Если строка начинается со знака '#', то зто комментарий,
+# пустые строки игнорируются.
+
+# К файлам со следующими расширениями будет применяться подсветка,
+# изменяйте или добавляйте расширения в соответствии с необходимостью.
+extension htm
+extension html
+extension HTM
+extension HTML
+extension shtml
+extension SHTML
+extension rhtml
+extension RHTML
+extension yc
+
+# Запись - строка из трех полей, которые разделяются пробелами или табуляциями
+# ----------------------------------------------------------------------------
+# 1. имя тега от начала строки (символы латиницы без кавычек в любом регистре)
+# 2. наличие параметров для тега - цифра 1/0 (да/нет)
+# 3. наличие закрывающего тега - цифра 1/0 (да/нет)
+
+a		1	1
+address		0	1
+applet		1	1
+area		1	0
+
+b		0	1
+base		1	0
+basefont	1	0
+bgsound		1	0
+big		0	1
+blockquote	0	1
+body		1	1
+br		1	0
+
+caption		1	1
+center		0	1
+cite		0	1
+code		0	1
+col		1	0
+colgroup	1	0
+comment		0	1
+
+dd		0	1
+dfn		0	1
+dir   		1	1
+div   		1	1
+dl		1	1
+dt		0	1
+
+em		0	1
+embed 		1	1
+
+font  		1	1
+form  		1	1
+frame 		1	1
+frameset	1	1
+
+h1		1	1
+h2		1	1
+h3		1	1
+h4		1	1
+h5		1	1
+h6		1	1
+head  		0	1
+hr		1	0
+html  		1	1
+
+i		0	1
+iframe		1	1
+img   		1	0
+input 		1	0
+isindex		1	0
+
+kbd   		0	1
+
+li		1	1
+link  		1	0
+listing		0	1
+
+map   		1	1
+marquee		1	1
+menu  		1	1
+meta  		1	0
+multicol	1	1
+
+nextid		1	0
+nobr  		0	1
+noframes	0	1
+noscript	0	1
+
+object		1	1
+ol		1	1
+option		1	1
+
+p		1	1
+param 		1	1
+plaintext	0	0
+pre   		1	1
+
+s		0	1
+samp  		0	1
+script		1	1
+select		1	1
+small 		0	1
+spacer		1	0
+span  		1	1
+strike		0	1
+strong		0	1
+style 		0	1
+sub   		0	1
+sup   		0	1
+
+table 		1	1
+tbody 		0	0
+td		1	1
+textarea	1	1
+tfoot 		0	0
+th		1	1
+thead 		0	0
+title 		0	1
+tr		1	1
+tt		0	1
+
+u		0	1
+ul		1	1
+var   		0	1
+wbr   		0	1
+xmp   		0	1

@@ -1,0 +1,14 @@
+#	BSDI	Makefile,v 1.1 1995/01/10 20:31:22 polk Exp
+
+@SET_MAKE@
+
+SUBDIR=	lib
+MAKE=	@MAKE@
+RM=     @RM@
+
+distclean:
+	-$(RM) -f Makefile
+	cd www; export MAKEFLAGS=''; $(MAKE) distclean
+	cd lib; export MAKEFLAGS=''; $(MAKE) distclean
+
+.include <bsd.subdir.mk>

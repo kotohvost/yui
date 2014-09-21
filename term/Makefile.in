@@ -1,0 +1,41 @@
+# Makefile.in for generating Makefile.
+# $Id: Makefile.in,v 3.1.2.1 2007/07/24 11:46:48 shelton Exp $
+
+# Compiler
+CC = @CC@
+CFLAGS = @CFLAGS@
+
+# Tools
+RM = @RM@
+AR = @AR@
+RANLIB = @RANLIB@
+
+LIB = libtcaps.a
+OBJS = tcaps.o tmachine.o
+PROGS = tcaptest tinfotest termtest machtest
+
+all: $(LIB) $(PROGS)
+
+$(LIB): $(OBJS)
+	$(AR) cr $(LIB) $?
+	$(RANLIB) $@
+
+tcaptest: tcaptest.o $(LIB)
+	$(CC) $(CFLAGS) -o $@ $@.o $(LIB)
+
+tinfotest: tinfotest.o $(LIB)
+	$(CC) $(CFLAGS) -o $@ $@.o $(LIB)
+
+termtest: termtest.o $(LIB)
+	$(CC) $(CFLAGS) -o $@ $@.o $(LIB)
+
+machtest: machtest.o $(LIB)
+	$(CC) $(CFLAGS) -o $@ $@.o $(LIB)
+
+clean:
+	-$(RM) -f *.a *.o core* *.b *.BAK $(PROGS)
+
+distclean: clean
+	-$(RM) -f Makefile
+
+tcaps.o: tcaps.c tcaps.h
